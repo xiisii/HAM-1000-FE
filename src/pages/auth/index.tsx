@@ -6,7 +6,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import PasswordInput from "src/components/ui/PasswordInput";
 import HeaderTitle from "src/components/ui/HeaderTitle";
 import { paths } from "src/paths";
-import BackgroundDashboard from "../../../public/image/Background_Dashboard.svg";
+import BackgroundDashboard from "public/image/QDAT-BackGound.jpg";
 import type { Page as PageType } from "src/types/page";
 
 const Page: PageType = () => {
@@ -57,15 +57,6 @@ const Page: PageType = () => {
       </div>
 
       <div className="flex flex-col max-w-max max-h-max justify-center items-center md:px-[106px] lg:px-[106px] md:w-auto md:h-auto lg:h-auto lg:w-auto p-4 md:m-20 lg:m-0">
-        <div
-          className="flex self-start px-4 pt-1 pb-1 border-slate-200 border gap-2 w-[115px] text-xs h-[24px] bg-buttons-buttons-secondary-default rounded-lg cursor-pointer"
-          onClick={handleGoBack}
-        >
-          <FaArrowLeftLong />
-          <span className="label color-label-input-caret label-text text-xs font-semibold w-[60px] h-[16px]">
-            Quay lại
-          </span>
-        </div>
         <HeaderTitle />
         <div className="w-full max-w-md">
           <form
@@ -75,7 +66,7 @@ const Page: PageType = () => {
             }}
           >
             <div className="flex flex-col gap-2">
-              <span className="label color-label-input-caret label-text text-xs font-semibold">
+              <span className="label color-label-input-caret label-text text-xs font-semibold text-red-500">
                 Tên đăng nhập
               </span>
               <input
@@ -86,7 +77,7 @@ const Page: PageType = () => {
                 value={username}
               />
               <div className="gap-6"></div>
-              <span className="label color-label-input-caret label-text text-xs font-semibold">
+              <span className="label color-label-input-caret label-text text-xs font-semibold text-red-500">
                 Mật khẩu
               </span>
               <PasswordInput

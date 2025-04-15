@@ -6,7 +6,7 @@ import { Section } from "../config/config";
 import SimpleBar from "simplebar-react";
 import { SideNavSection } from "./side-nav-section";
 import Image from "next/image";
-import LogoSystemVertical from "../../../../public/image/Logo_System_Vertical.png";
+import LogoSystemVertical from "public/image/QDAT-LOGO.jpg";
 import { NavColor } from "src/types/settings";
 import { FaList } from "react-icons/fa";
 
@@ -50,7 +50,7 @@ export const SideNav: FC<SideNavProps> = (props) => {
                 {/* <p className="text-sm font-semibold">SchoolBus Systems</p> */}
               </div>
               <h1 className="text-lg md:text-base sm:text-sm font-semibold text-primary text-center">
-                Hệ thống giám sát học sinh trên xe đưa đón
+                Ứng dụng hỗ trợ phát hiện <br /> Ung thư da 
               </h1>
             </div>
           </div>

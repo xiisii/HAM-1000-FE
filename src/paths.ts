@@ -18,6 +18,7 @@ export const paths = {
     "giam-sat-chuyen-xe": "/dashboard/giam-sat-chuyen-xe",
     "quan-ly-hoc-sinh": "/dashboard/quan-ly-hoc-sinh",
     "quan-ly-tai-xe": "/dashboard/quan-ly-tai-xe",
+    "phat-hien-ung-thu-da": "/dashboard/phat-hien-ung-thu-da",
     logout: "/dang-xuat",
   },
   401: "/401",

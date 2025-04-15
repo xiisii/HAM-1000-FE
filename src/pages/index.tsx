@@ -1,74 +1,114 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "src/hooks/use-auth";
-import type { Page as PageType } from "src/types/page";
 import Image from "next/image";
-import backgroundImage from "../../public/logos/face-recognition.jpg";
-import HeaderTitle from "src/components/ui/HeaderTitle";
+import { useAuth } from "src/hooks/use-auth";
 import { useRouter } from "next/router";
-import {
-  AuthContext,
-  AuthContextType,
-  AuthProvider,
-} from "src/contexts/auth/jwt-context";
-import PasswordInput from "src/components/ui/PasswordInput";
-import { paths } from "src/paths";
-import { IssuerGuard } from "src/guards/issuer-guard";
-import { GuestGuard } from "src/guards/guest-guard";
-import { Issuer } from "src/utils/auth";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import PasswordInput from "src/components/ui/PasswordInput";
+import HeaderTitle from "src/components/ui/HeaderTitle";
+import { paths } from "src/paths";
+import BackgroundDashboard from "public/image/QDAT-BackGound.jpg";
+import type { Page as PageType } from "src/types/page";
 
-// Import SVGs
-import LeftImageSvg from "../../public/image/Application_CheckIn.svg";
-import RightImageSvg from "../../public/image/Application_Management.svg";
-import LogoSystem from "../../public/image/Logo_System.svg";
-import HeaderSection from "src/components/header_section";
 const Page: PageType = () => {
   const router = useRouter();
+  const { signIn } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleImageClick = (path: string) => {
-    router.push(path);
+  const handleSignUp = () => {
+    router.replace(paths.auth.register);
+  };
+
+  const handleSignIn = async () => {
+    try {
+      if (username == "admin" && password == "123") {
+        console.log("Đăng nhập thành công");
+        router.replace(paths.dashboard.index);
+      } else {
+        await signIn(username, password);
+      }
+    } catch (error: any) {
+      console.error(error);
+      setError("Vui lòng kiểm tra lại Tên đăng nhập/Mật khẩu");
+    }
+  };
+
+  useEffect(() => {
+    if (username || password) {
+      setError("");
+    }
+  }, [username, password]);
+
+  const handleGoBack = () => {
+    console.log("Quay lại");
+    router.replace(paths.index);
   };
 
   return (
-    <div className="flex flex-col min-h-screen max-w-screen">
-      <HeaderSection />
-      <div className="flex flex-col text-center mt-4">
-        <h1 className="text-2xl md:text-4xl text-[#3a84ee]">
-          Hệ thống giám sát học sinh trên xe đưa đón
-        </h1>
+    <div className="h-screen  flex  md:flex-col lg:flex-row md:h-[1300px] lg:h-screen overflow-y-auto">
+      <div className="relative hidden md:block   ">
+        <Image
+          src={BackgroundDashboard}
+          alt="Background images"
+          className="md:w-full md:h-[400px] lg:h-full lg:w-full h-full w-full  object-cover "
+        />
       </div>
-      <div className="flex flex-col md:flex-row flex-grow mt-8 md:mt-16">
-        <div className="flex flex-col items-center w-full md:w-1/2 p-4">
-          <img
-            src={LeftImageSvg.src}
-            className="cursor-pointer object-cover w-1/2 h-auto md:min-w-[200px] md:max-w-[800px]"
-            alt="Ứng dụng điểm danh"
-            onClick={() => handleImageClick("/face_recognition")}
-          />
-          <h1 className="text-center text-xl md:text-3xl mt-2 text-[#df9717]">
-            Ứng dụng điểm danh
-          </h1>
-        </div>
-        <div className="flex flex-col items-center w-full md:w-1/2 p-4">
-          <img
-            src={RightImageSvg.src}
-            className="cursor-pointer object-cover w-1/2 h-auto md:min-w-[200px] md:max-w-[800px]"
-            alt="Phần mềm quản lý"
-            onClick={() => handleImageClick("/auth")}
-          />
-          <h1 className="text-center text-xl md:text-3xl mt-2 text-[#df9717]">
-            Phần mềm quản lý
-          </h1>
+
+      <div className="flex flex-col max-w-max max-h-max justify-center items-center md:px-[106px] lg:px-[106px] md:w-auto md:h-auto lg:h-auto lg:w-auto p-4 md:m-20 lg:m-0">
+        <HeaderTitle />
+        <div className="w-full max-w-md">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSignIn();
+            }}
+          >
+            <div className="flex flex-col gap-2">
+              <span className="label color-label-input-caret label-text text-xs font-semibold">
+                Tên đăng nhập
+              </span>
+              <input
+                type="text"
+                placeholder="Nhập tên đăng nhập tại đây ..."
+                className="input input-bordered w-full px-3"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+              />
+              <div className="gap-6"></div>
+              <span className="label color-label-input-caret label-text text-xs font-semibold">
+                Mật khẩu
+              </span>
+              <PasswordInput
+                onChange={(e: any) => setPassword(e.target.value)}
+                value={password}
+                showPassword={showPassword}
+                togglePasswordVisibility={() => setShowPassword(!showPassword)}
+              />
+            </div>
+            <div className="mt-5"></div>
+            {error && (
+              <div>
+                <p className="text-sm font-semibold text-center flex items-center justify-center text-red-500 gap-6">
+                  {error}
+                </p>
+                <div className="mt-5"></div>
+              </div>
+            )}
+            <button
+              className="btn bg-orange-400 text-white w-full hover:bg-orange-500"
+              type="submit"
+            >
+              Đăng nhập
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
 };
 
-Page.getLayout = (page) => (
-  <IssuerGuard issuer={Issuer.JWT}>
-    <GuestGuard>{page}</GuestGuard>
-  </IssuerGuard>
-);
+Page.getLayout = (page) => <>{page}</>;
 
 export default Page;

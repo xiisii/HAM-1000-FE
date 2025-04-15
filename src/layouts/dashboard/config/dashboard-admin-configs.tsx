@@ -6,6 +6,7 @@ import { FilesEarmarkFillIcon } from "src/components/icons/FilesEarmarkFillIcon"
 import { BsDoorOpen } from "react-icons/bs";
 
 import { FaBus } from "react-icons/fa6";
+import { FaCameraRetro } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { GiSteeringWheel } from "react-icons/gi";
 
@@ -25,19 +26,9 @@ export const getDashboardAdminConfigs = () => {
         //   icon: <IoPersonCircleOutline className="h-6 w-6" />,
         // },
         {
-          title: "Giám sát chuyến xe",
-          path: paths.dashboard["giam-sat-chuyen-xe"],
-          icon: <FaBus className="h-6 w-6" />,
-        },
-        {
-          title: "Quản lý học sinh",
-          path: paths.dashboard["quan-ly-hoc-sinh"],
-          icon: <PiStudentBold className="h-6 w-6" />,
-        },
-        {
-          title: "Quản lý tài xế",
-          path: paths.dashboard["quan-ly-tai-xe"],
-          icon: <GiSteeringWheel className="h-6 w-6" />,
+          title: "Phát hiện Ung thư da",
+          path: paths.dashboard["phat-hien-ung-thu-da"],
+          icon: <FaCameraRetro className="h-6 w-6" />,
         },
         {
           title: "Đăng xuất",

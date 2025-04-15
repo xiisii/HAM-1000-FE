@@ -21,7 +21,7 @@ const App = (props: AppProps) => {
   return (
     <>
       <Head>
-        <title>Dịch vụ đưa đón đến trường</title>
+        <title>Hỗ trợ phát hiện Ung thư da</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
